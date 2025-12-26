@@ -46,15 +46,10 @@
         }
 
         .hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
             display: none !important;
         }
 
         .visible {
-            opacity: 1;
-            transform: translateY(0);
             display: block !important;
         }
 
@@ -136,12 +131,6 @@
         .button:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 30px rgba(255, 0, 51, 0.7);
-        }
-
-        .button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
         }
 
         /* Проверка первака */
@@ -310,14 +299,6 @@
             line-height: 1.8;
             position: relative;
             padding-left: 20px;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.5s ease;
-        }
-
-        .diss-line.visible {
-            opacity: 1;
-            transform: translateX(0);
         }
 
         .diss-line::before {
@@ -453,24 +434,6 @@
             20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
 
-        /* Прогресс */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            z-index: 1001;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
         /* Адаптивность */
         @media (max-width: 768px) {
             .title { font-size: 2.5rem; }
@@ -520,11 +483,6 @@
     </style>
 </head>
 <body class="mobile-fix">
-    <!-- Прогресс бар -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-
     <!-- Главный экран -->
     <section id="main-screen" class="visible">
         <div class="container">
@@ -581,106 +539,106 @@
             <div class="diss-text">
                 <!-- Часть 1 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Мы тут собрались все: <span class="highlight">МС мистер пузо</span>, <span class="highlight">екей два Барбос</span>,</div>
-                    <div class="diss-line hidden">И <span class="highlight">МС Мамин Подсос</span>!</div>
-                    <div class="diss-line hidden">В прошлый раз вынес легко — фристайлом просто играл,</div>
-                    <div class="diss-line hidden">Про маму шутил, признаю, тогда даже не напрягал,</div>
-                    <div class="diss-line hidden">Но сейчас пиши ей похоронные сразу — я режим поменял!</div>
+                    <div class="diss-line">Мы тут собрались все: <span class="highlight">МС мистер пузо</span>, <span class="highlight">екей два Барбос</span>,</div>
+                    <div class="diss-line">И <span class="highlight">МС Мамин Подсос</span>!</div>
+                    <div class="diss-line">В прошлый раз вынес легко — фристайлом просто играл,</div>
+                    <div class="diss-line">Про маму шутил, признаю, тогда даже не напрягал,</div>
+                    <div class="diss-line">Но сейчас пиши ей похоронные сразу — я режим поменял!</div>
                 </div>
                 
                 <!-- Часть 2 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Так нихуя ты стример — пятьдесят три фолла, это не рост,</div>
-                    <div class="diss-line hidden">Это не канал, это подъезд — весь «фан-клуб» влез в один пост.</div>
-                    <div class="diss-line hidden">Запомнился не контентом, не скиллом, не речью, не словом,</div>
-                    <div class="diss-line hidden">А тем, как по моей указке позорился на зимнем марафоне.</div>
+                    <div class="diss-line">Так нихуя ты стример — пятьдесят три фолла, это не рост,</div>
+                    <div class="diss-line">Это не канал, это подъезд — весь «фан-клуб» влез в один пост.</div>
+                    <div class="diss-line">Запомнился не контентом, не скиллом, не речью, не словом,</div>
+                    <div class="diss-line">А тем, как по моей указке позорился на зимнем марафоне.</div>
                 </div>
                 
                 <!-- Часть 3 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Шоколадный торт от мамки — в Роппонги выебнулась на показ,</div>
-                    <div class="diss-line hidden">Липкая хуйня внутри, вкус как дешёвый развод, знакомо да?</div>
-                    <div class="diss-line hidden">«На твой ДР мы поедим лучше тортика!» — кричала с пеной у рта,</div>
-                    <div class="diss-line hidden"><span class="punchline">Но у твоей мамы сперма такая сладкая — вот откуда шоколад у торта!</span></div>
+                    <div class="diss-line">Шоколадный торт от мамки — в Роппонги выебнулась на показ,</div>
+                    <div class="diss-line">Липкая хуйня внутри, вкус как дешёвый развод, знакомо да?</div>
+                    <div class="diss-line">«На твой ДР мы поедим лучше тортика!» — кричала с пеной у рта,</div>
+                    <div class="diss-line"><span class="punchline">Но у твоей мамы сперма такая сладкая — вот откуда шоколад у торта!</span></div>
                 </div>
                 
                 <!-- Часть 4 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">После нашего первого баттла — я стал разработчиком,</div>
-                    <div class="diss-line hidden">Программистом пиздатыньким, проекты, бабки, всё по-взрослому.</div>
-                    <div class="diss-line hidden">Вьетнам, Дубай, перелёты, азиаток крою — жизнь шире гор,</div>
-                    <div class="diss-line hidden"><span class="punchline">А ты чё? Пошёл в аквапарк — говно тёр тряпкой, помощник уборщика, вот и весь твой путь.</span></div>
+                    <div class="diss-line">После нашего первого баттла — я стал разработчиком,</div>
+                    <div class="diss-line">Программистом пиздатыньким, проекты, бабки, всё по-взрослому.</div>
+                    <div class="diss-line">Вьетнам, Дубай, перелёты, азиаток крою — жизнь шире гор,</div>
+                    <div class="diss-line"><span class="punchline">А ты чё? Пошёл в аквапарк — говно тёр тряпкой, помощник уборщика, вот и весь твой путь.</span></div>
                 </div>
                 
                 <!-- Часть 5 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Сто кэсов заработал за три месяца — эт конечно респект, но ни рубля не спустил,</div>
-                    <div class="diss-line hidden">Бабки в гробу лежат, хм, какой-то двойной смысл получается?</div>
-                    <div class="diss-line hidden">Комп за тридцатку мечтал мощный — папин друг бабло спиздил втихаря,</div>
-                    <div class="diss-line hidden">Встроенка слабая за пятнашку — твоя жизнь в точности такая же хуйня!</div>
+                    <div class="diss-line">Сто кэсов заработал за три месяца — эт конечно респект, но ни рубля не спустил,</div>
+                    <div class="diss-line">Бабки в гробу лежат, хм, какой-то двойной смысл получается?</div>
+                    <div class="diss-line">Комп за тридцатку мечтал мощный — папин друг бабло спиздил втихаря,</div>
+                    <div class="diss-line">Встроенка слабая за пятнашку — твоя жизнь в точности такая же хуйня!</div>
                 </div>
                 
                 <!-- Часть 6 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Пеленгация — твой спорт ебаный, «Листятники» в лесу с антенной машут,</div>
-                    <div class="diss-line hidden">Пока нормальные пацаны в фортнайт ебашут!</div>
-                    <div class="diss-line hidden">Мы похожи в одиночестве? Да, но я его выбираю сам — когда захочу, уйду в тень,</div>
-                    <div class="diss-line hidden">А ты в нём сгниёшь навсегда — потому что никто к тебе не придёт, даже за деньги.</div>
+                    <div class="diss-line">Пеленгация — твой спорт ебаный, «Листятники» в лесу с антенной машут,</div>
+                    <div class="diss-line">Пока нормальные пацаны в фортнайт ебашут!</div>
+                    <div class="diss-line">Мы похожи в одиночестве? Да, но я его выбираю сам — когда захочу, уйду в тень,</div>
+                    <div class="diss-line">А ты в нём сгниёшь навсегда — потому что никто к тебе не придёт, даже за деньги.</div>
                 </div>
                 
                 <!-- Часть 7 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Я Соньку трахал жёстко — она стонала, текла и кричала в кровати,</div>
-                    <div class="diss-line hidden">Вся ночь в угаре, кончала раз за разом, в полной страсти.</div>
-                    <div class="diss-line hidden">Ты керамбит показал гордо — она побежала к училке стучать,</div>
-                    <div class="diss-line hidden">Ты заплакал в истерике: «Не рассказывайте маме!»</div>
+                    <div class="diss-line">Я Соньку трахал жёстко — она стонала, текла и кричала в кровати,</div>
+                    <div class="diss-line">Вся ночь в угаре, кончала раз за разом, в полной страсти.</div>
+                    <div class="diss-line">Ты керамбит показал гордо — она побежала к училке стучать,</div>
+                    <div class="diss-line">Ты заплакал в истерике: «Не рассказывайте маме!»</div>
                 </div>
                 
                 <!-- Часть 8 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Братан, любой твой панч контрится простой идеологией:</div>
-                    <div class="diss-line hidden">Кто с Шевченкой тусил, маски Анонимуса брал — тому не до логики.</div>
-                    <div class="diss-line hidden">Тульсики, пряники — твой максимум, дальше фантазии ноль,</div>
-                    <div class="diss-line hidden">Твой лучший дисс — про манную кашу, о чем речь сынок?</div>
+                    <div class="diss-line">Братан, любой твой панч контрится простой идеологией:</div>
+                    <div class="diss-line">Кто с Шевченкой тусил, маски Анонимуса брал — тому не до логики.</div>
+                    <div class="diss-line">Тульсики, пряники — твой максимум, дальше фантазии ноль,</div>
+                    <div class="diss-line">Твой лучший дисс — про манную кашу, о чем речь сынок?</div>
                 </div>
                 
                 <!-- Часть 9 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Чем ты меня баттлить собрался — фотками бати из старого ВК?</div>
-                    <div class="diss-line hidden">Думаешь, это козырь? А если я скажу что: у тебя в свидетельстве о рождении</div>
-                    <div class="diss-line hidden">в графе «отец» не прочерк пустой, а приписка мелкая:</div>
-                    <div class="diss-line hidden"><span class="punchline">променял шалаву из спа — и свалил ебать молоденьких!</span></div>
+                    <div class="diss-line">Чем ты меня баттлить собрался — фотками бати из старого ВК?</div>
+                    <div class="diss-line">Думаешь, это козырь? А если я скажу что: у тебя в свидетельстве о рождении</div>
+                    <div class="diss-line">в графе «отец» не прочерк пустой, а приписка мелкая:</div>
+                    <div class="diss-line"><span class="punchline">променял шалаву из спа — и свалил ебать молоденьких!</span></div>
                 </div>
                 
                 <!-- Часть 10 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Я реально думал в моменте — ты мой самый верный кореш,</div>
-                    <div class="diss-line hidden">Тот, что прилип к банке намертво, не отвалится, если спросишь.</div>
-                    <div class="diss-line hidden">Думал: подойду с вопросом — ответишь чётко и прямо,</div>
-                    <div class="diss-line hidden">Но память вскрыла один эпизод, и вся ваша дружба — обмана.</div>
+                    <div class="diss-line">Я реально думал в моменте — ты мой самый верный кореш,</div>
+                    <div class="diss-line">Тот, что прилип к банке намертво, не отвалится, если спросишь.</div>
+                    <div class="diss-line">Думал: подойду с вопросом — ответишь чётко и прямо,</div>
+                    <div class="diss-line">Но память вскрыла один эпизод, и вся ваша дружба — обмана.</div>
                 </div>
                 
                 <!-- Часть 11 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Пятый класс, Никита, мохито — да, накосячил, не спорю,</div>
-                    <div class="diss-line hidden">Может, был не прав тогда, но не в этом вся история.</div>
-                    <div class="diss-line hidden">Настоящий кент — это Женя, он вышел ко мне один,</div>
-                    <div class="diss-line hidden">На турники, на площадку — без толпы и без витрин.</div>
+                    <div class="diss-line">Пятый класс, Никита, мохито — да, накосячил, не спорю,</div>
+                    <div class="diss-line">Может, был не прав тогда, но не в этом вся история.</div>
+                    <div class="diss-line">Настоящий кент — это Женя, он вышел ко мне один,</div>
+                    <div class="diss-line">На турники, на площадку — без толпы и без витрин.</div>
                 </div>
                 
                 <!-- Часть 12 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">А ты? Со всеми остальными — плакать в тряпку ушёл,</div>
-                    <div class="diss-line hidden">Даже не подошёл, не сказал ни слова — просто слил и всё.</div>
-                    <div class="diss-line hidden">Я стоял один, и тогда всё встало на места,</div>
-                    <div class="diss-line hidden"><span class="punchline">Вот где разница между кентом и пустым «братаном» навсегда.</span></div>
+                    <div class="diss-line">А ты? Со всеми остальными — плакать в тряпку ушёл,</div>
+                    <div class="diss-line">Даже не подошёл, не сказал ни слова — просто слил и всё.</div>
+                    <div class="diss-line">Я стоял один, и тогда всё встало на места,</div>
+                    <div class="diss-line"><span class="punchline">Вот где разница между кентом и пустым «братаном» навсегда.</span></div>
                 </div>
                 
                 <!-- Часть 13 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Так что нахуй тебя и нахуй твою бабку вместе с вашим полудохлым 9-Б,</div>
-                    <div class="diss-line hidden">Лучше захлебнусь ебучим ноунеймом в своём мохито до дна,</div>
-                    <div class="diss-line hidden"><span class="punchline">Чем снова увижу твой зимний марафон — три стрима...</span></div>
+                    <div class="diss-line">Так что нахуй тебя и нахуй твою бабку вместе с вашим полудохлым 9-Б,</div>
+                    <div class="diss-line">Лучше захлебнусь ебучим ноунеймом в своём мохито до дна,</div>
+                    <div class="diss-line"><span class="punchline">Чем снова увижу твой зимний марафон — три стрима...</span></div>
                 </div>
             </div>
         </div>
@@ -701,65 +659,65 @@
             <div class="diss-text">
                 <!-- Часть 1 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Без негатива нахуй — за орешник отвечать придётся в аду, в огне.</div>
-                    <div class="diss-line hidden">Мама Елена Чижевская — в «спа» трудится, стыдно сказать по-честному,</div>
-                    <div class="diss-line hidden">Чем дом кормится на деле — хуями клиентов, а не спинами в пене.</div>
-                    <div class="diss-line hidden">«Спа» — эвфемизм для шлюхи: трёт спинку, а потом берёт в рот,</div>
-                    <div class="diss-line hidden"><span class="punchline">Проститутка дешёвая в халате — вот вся ваша гордость в семейном фото!</span></div>
+                    <div class="diss-line">Без негатива нахуй — за орешник отвечать придётся в аду, в огне.</div>
+                    <div class="diss-line">Мама Елена Чижевская — в «спа» трудится, стыдно сказать по-честному,</div>
+                    <div class="diss-line">Чем дом кормится на деле — хуями клиентов, а не спинами в пене.</div>
+                    <div class="diss-line">«Спа» — эвфемизм для шлюхи: трёт спинку, а потом берёт в рот,</div>
+                    <div class="diss-line"><span class="punchline">Проститутка дешёвая в халате — вот вся ваша гордость в семейном фото!</span></div>
                 </div>
                 
                 <!-- Часть 2 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">С мамой твоей мы быстро респект взаимно свели,</div>
-                    <div class="diss-line hidden">А сука в друзья меня сама добавила, смотри!</div>
-                    <div class="diss-line hidden">Но я на другом материке — это ты не увидишь,</div>
-                    <div class="diss-line hidden"><span class="punchline">Но зато твоя мать на чужом хуе — ты это услышишь!</span></div>
+                    <div class="diss-line">С мамой твоей мы быстро респект взаимно свели,</div>
+                    <div class="diss-line">А сука в друзья меня сама добавила, смотри!</div>
+                    <div class="diss-line">Но я на другом материке — это ты не увидишь,</div>
+                    <div class="diss-line"><span class="punchline">Но зато твоя мать на чужом хуе — ты это услышишь!</span></div>
                 </div>
                 
                 <!-- Часть 3 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Два развода, третий на подходе, шалава с дырой вместо души,</div>
-                    <div class="diss-line hidden">Набухивается в хлам, валяется в блевоте, как падаль в грязи.</div>
-                    <div class="diss-line hidden">С 8 до 10 — "подвиг", в ВК хуйню строчит, ебанутая на голову,</div>
-                    <div class="diss-line hidden">Патриотка хуёвая, за СВО орёт, про орешник воет в тему.</div>
+                    <div class="diss-line">Два развода, третий на подходе, шалава с дырой вместо души,</div>
+                    <div class="diss-line">Набухивается в хлам, валяется в блевоте, как падаль в грязи.</div>
+                    <div class="diss-line">С 8 до 10 — "подвиг", в ВК хуйню строчит, ебанутая на голову,</div>
+                    <div class="diss-line">Патриотка хуёвая, за СВО орёт, про орешник воет в тему.</div>
                 </div>
                 
                 <!-- Часть 4 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">В Ялте всю жизнь просидела, когда Украина была, теперь плачет по Крокусу, ты определись сука</div>
-                    <div class="diss-line hidden">Такая "патриотка" — хули ж не пошла в окопы дохнуть?</div>
-                    <div class="diss-line hidden">Гипокритка пиздец, слова — пустое дерьмо, воняет ложью на километр,</div>
-                    <div class="diss-line hidden"><span class="punchline">Твой дом — бордель разваленный, ты в нём растешь, как опарыш в говне, метр за метром.</span></div>
+                    <div class="diss-line">В Ялте всю жизнь просидела, когда Украина была, теперь плачет по Крокусу, ты определись сука</div>
+                    <div class="diss-line">Такая "патриотка" — хули ж не пошла в окопы дохнуть?</div>
+                    <div class="diss-line">Гипокритка пиздец, слова — пустое дерьмо, воняет ложью на километр,</div>
+                    <div class="diss-line"><span class="punchline">Твой дом — бордель разваленный, ты в нём растешь, как опарыш в говне, метр за метром.</span></div>
                 </div>
                 
                 <!-- Часть 5 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Какой итог, блядь? Знаешь, почему меня зовёшь отцом —</div>
-                    <div class="diss-line hidden">Потому что своего родного ты в жизни так и не нашёл!</div>
-                    <div class="diss-line hidden">Безотцовщина полная, папаша — спермобанк на выходные,</div>
+                    <div class="diss-line">Какой итог, блядь? Знаешь, почему меня зовёшь отцом —</div>
+                    <div class="diss-line">Потому что своего родного ты в жизни так и не нашёл!</div>
+                    <div class="diss-line">Безотцовщина полная, папаша — спермобанк на выходные,</div>
                 </div>
                 
                 <!-- Часть 6 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Я зову своего отца просто "папа" — а ты меня, потому что своего не видишь вживе.</div>
-                    <div class="diss-line hidden">Твоя "семья" — это шутка, разваленная хата, где даже праздники врозь,</div>
-                    <div class="diss-line hidden"><span class="punchline">Мои вместе за столом — вот разница, сука, между мной и тобой!</span></div>
+                    <div class="diss-line">Я зову своего отца просто "папа" — а ты меня, потому что своего не видишь вживе.</div>
+                    <div class="diss-line">Твоя "семья" — это шутка, разваленная хата, где даже праздники врозь,</div>
+                    <div class="diss-line"><span class="punchline">Мои вместе за столом — вот разница, сука, между мной и тобой!</span></div>
                 </div>
                 
                 <!-- Часть 7 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Ты в поисках отца вечно, но один хуй в пролёте, может дед сможет его заменить?</div>
-                    <div class="diss-line hidden">Хотя дед — овощ инвалидный, ты ему штаны натягиваешь, как сиделка дешёвая,</div>
-                    <div class="diss-line hidden">Семья — сплошная помойка, гниль и развал, одна хуйня дешёвая.</div>
-                    <div class="diss-line hidden">Эт тебе за Кирюху Лапу, ты про "не смыл" пиздел без остановки,</div>
+                    <div class="diss-line">Ты в поисках отца вечно, но один хуй в пролёте, может дед сможет его заменить?</div>
+                    <div class="diss-line">Хотя дед — овощ инвалидный, ты ему штаны натягиваешь, как сиделка дешёвая,</div>
+                    <div class="diss-line">Семья — сплошная помойка, гниль и развал, одна хуйня дешёвая.</div>
+                    <div class="diss-line">Эт тебе за Кирюху Лапу, ты про "не смыл" пиздел без остановки,</div>
                 </div>
                 
                 <!-- Часть 8 -->
                 <div class="diss-section">
-                    <div class="diss-line hidden">Теперь жри ответку по полной:</div>
-                    <div class="diss-line hidden">Бабка твоя недавно сдохла? Да всем похуй, абсолютный ноль,</div>
-                    <div class="diss-line hidden">Как сказала одна гнида: "Дебильные смерти не нуждаются в скорбии!!!"</div>
-                    <div class="diss-line hidden"><span class="punchline" style="font-size: 1.8rem;">РАУНД СУКА!</span></div>
+                    <div class="diss-line">Теперь жри ответку по полной:</div>
+                    <div class="diss-line">Бабка твоя недавно сдохла? Да всем похуй, абсолютный ноль,</div>
+                    <div class="diss-line">Как сказала одна гнида: "Дебильные смерти не нуждаются в скорбии!!!"</div>
+                    <div class="diss-line"><span class="punchline" style="font-size: 1.8rem;">РАУНД СУКА!</span></div>
                 </div>
             </div>
         </div>
@@ -800,17 +758,9 @@
         
         const countdown = document.getElementById('countdown');
         const countdownNumber = document.getElementById('countdownNumber');
-        const progressBar = document.getElementById('progressBar');
-        
-        // Все строки дисса
-        const dissLinesRound1 = document.querySelectorAll('#round-1 .diss-line');
-        const dissLinesRound2 = document.querySelectorAll('#round-2 .diss-line');
         
         // Требуемая подпись
         const requiredSignature = "Я, Егор Первак, признаю что 26.12.2025 Супер Сус похоронит меня заживо после этого батла";
-        
-        // Текущий раунд
-        let currentRound = 1;
         
         // Запуск дисса
         startButton.addEventListener('click', function() {
@@ -876,62 +826,17 @@
                         clearInterval(countdownInterval);
                         countdown.classList.remove('active');
                         
-                        // Показываем первый раунд
+                        // Показываем первый раунд ВЕСЬ СРАЗУ
                         round1.classList.remove('hidden');
                         round1.classList.add('visible');
-                        
-                        // Начинаем показ строк первого раунда
-                        setTimeout(() => showDissLines(dissLinesRound1, 1), 500);
                         
                         // Прокрутка к началу раунда
                         setTimeout(() => {
                             round1.scrollIntoView({ behavior: 'smooth' });
-                        }, 1000);
+                        }, 100);
                     }, 1000);
                 }
             }, 1000);
-        }
-        
-        // Показ строк дисса
-        function showDissLines(lines, roundNum) {
-            let delay = 0;
-            
-            lines.forEach((line, index) => {
-                setTimeout(() => {
-                    line.classList.add('visible');
-                    
-                    // Обновляем прогресс бар
-                    const totalLines = roundNum === 1 ? dissLinesRound1.length : dissLinesRound2.length;
-                    const baseProgress = roundNum === 1 ? 0 : 50;
-                    const roundProgress = ((index + 1) / totalLines) * 50;
-                    progressBar.style.width = `${baseProgress + roundProgress}%`;
-                    
-                    // Автопрокрутка к новым строкам
-                    if (index % 5 === 0) {
-                        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    
-                    // Если последняя строка раунда
-                    if (index === lines.length - 1) {
-                        if (roundNum === 1) {
-                            // Активируем кнопку перехода ко второму раунду
-                            setTimeout(() => {
-                                nextRoundButton.style.display = 'block';
-                                nextRoundButton.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                            }, 1000);
-                        } else {
-                            // Активируем кнопку завершения
-                            setTimeout(() => {
-                                finishButton.style.display = 'block';
-                                finishButton.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                            }, 1000);
-                        }
-                    }
-                }, delay);
-                
-                // Задержка между строками
-                delay += 600;
-            });
         }
         
         // Переход ко второму раунду
@@ -940,23 +845,14 @@
             round1.classList.remove('visible');
             round1.classList.add('hidden');
             
-            // Показываем второй раунд
+            // Показываем второй раунд ВЕСЬ СРАЗУ
             round2.classList.remove('hidden');
             round2.classList.add('visible');
             
-            // Сбрасываем видимость строк второго раунда
-            dissLinesRound2.forEach(line => {
-                line.classList.remove('visible');
-            });
-            
-            // Начинаем показ второго раунда
+            // Прокрутка к началу второго раунда
             setTimeout(() => {
-                showDissLines(dissLinesRound2, 2);
                 round2.scrollIntoView({ behavior: 'smooth' });
-            }, 500);
-            
-            // Скрываем кнопку
-            nextRoundButton.style.display = 'none';
+            }, 100);
         });
         
         // Завершение дисса
@@ -969,16 +865,10 @@
             dissEnd.classList.remove('hidden');
             dissEnd.classList.add('visible');
             
-            // Заполняем прогресс бар
-            progressBar.style.width = '100%';
-            
             // Прокрутка к финалу
             setTimeout(() => {
                 dissEnd.scrollIntoView({ behavior: 'smooth' });
-            }, 500);
-            
-            // Скрываем кнопку
-            finishButton.style.display = 'none';
+            }, 100);
         });
         
         // Перезапуск
@@ -987,37 +877,17 @@
             dissEnd.classList.remove('visible');
             dissEnd.classList.add('hidden');
             
-            // Сбрасываем все строки
-            dissLinesRound1.forEach(line => line.classList.remove('visible'));
-            dissLinesRound2.forEach(line => line.classList.remove('visible'));
-            
             // Сбрасываем подпись
             signatureInput.value = '';
-            
-            // Сбрасываем прогресс
-            progressBar.style.width = '0%';
             
             // Показываем главный экран
             mainScreen.classList.remove('hidden');
             mainScreen.classList.add('visible');
             
             // Прокрутка к началу
-            mainScreen.scrollIntoView({ behavior: 'smooth' });
-            
-            // Скрываем кнопки управления
-            nextRoundButton.style.display = 'block';
-            finishButton.style.display = 'block';
-        });
-        
-        // Прогресс бар при скролле
-        window.addEventListener('scroll', function() {
-            if (round1.classList.contains('visible') || round2.classList.contains('visible')) {
-                return; // Не обновляем при показе дисса
-            }
-            
-            const totalHeight = document.body.scrollHeight - window.innerHeight;
-            const progress = (window.pageYOffset / totalHeight) * 100;
-            progressBar.style.width = `${progress}%`;
+            setTimeout(() => {
+                mainScreen.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         });
         
         // Загрузка страницы
@@ -1028,29 +898,6 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
-        });
-        
-        // Эффект наведения на строки дисса
-        dissLinesRound1.forEach(line => {
-            line.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateX(5px)';
-                this.style.transition = 'transform 0.3s ease';
-            });
-            
-            line.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateX(0)';
-            });
-        });
-        
-        dissLinesRound2.forEach(line => {
-            line.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateX(5px)';
-                this.style.transition = 'transform 0.3s ease';
-            });
-            
-            line.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateX(0)';
-            });
         });
     </script>
 </body>
