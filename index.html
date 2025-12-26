@@ -1,1 +1,988 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДИСС НА ПЕРВАКА - САНЛАО ТПО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #ff0033;
+            --secondary: #000000;
+            --accent: #00ccff;
+            --text: #ffffff;
+            --bg: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 51, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(0, 204, 255, 0.1) 0%, transparent 20%);
+        }
+
+        /* Общие стили */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Главный экран */
+        #main-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #main-screen::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.05;
+            top: -100%;
+            left: -100%;
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+        }
+
+        .title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .title span {
+            display: block;
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            color: var(--accent);
+            margin-top: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            margin-bottom: 40px;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(255, 0, 51, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 0, 51, 0.7);
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .button:hover::after {
+            opacity: 1;
+        }
+
+        /* Анимация отсчета */
+        #countdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        #countdown.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .countdown-number {
+            font-size: 20vw;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary);
+            animation: countdownPop 1s ease forwards;
+        }
+
+        /* Раунд */
+        .round-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .round-title h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            color: var(--accent);
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 10px 30px;
+            border: 3px solid var(--primary);
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .round-title h2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .round-title h2:hover::before {
+            left: 100%;
+        }
+
+        .diss-text {
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diss-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .diss-line {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            position: relative;
+            padding-left: 20px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .diss-line.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .diss-line::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .punchline {
+            color: var(--primary);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            display: inline-block;
+            margin: 10px 0;
+            animation: glow 2s infinite alternate;
+        }
+
+        .diss-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .diss-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Конец дисса */
+        #diss-end {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px var(--primary);
+            animation: glow 2s infinite alternate;
+        }
+
+        .final-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .restart-button {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .restart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(0, 204, 255, 0.5);
+        }
+
+        /* Анимации */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.03;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.08;
+            }
+        }
+
+        @keyframes countdownPop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 60px var(--primary);
+            }
+        }
+
+        @keyframes textReveal {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        /* Прогресс бар */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Звуковой индикатор */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Аудио волны */
+        .audio-wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, var(--primary));
+            opacity: 0.3;
+            animation: waveAnimation 3s infinite linear;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: 0.5s;
+            opacity: 0.2;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: 1s;
+            opacity: 0.1;
+        }
+
+        @keyframes waveAnimation {
+            0% {
+                transform: translateY(0) scaleY(1);
+            }
+            50% {
+                transform: translateY(-20px) scaleY(1.2);
+            }
+            100% {
+                transform: translateY(0) scaleY(1);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .title span {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .button {
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .diss-text {
+                padding: 25px 20px;
+            }
+            
+            .diss-line {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
+            
+            section {
+                padding: 50px 0;
+            }
+            
+            .final-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .title span {
+                font-size: 1.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .round-title h2 {
+                font-size: 1.8rem;
+                padding: 8px 20px;
+            }
+            
+            .diss-line {
+                font-size: 1rem;
+                padding-left: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .diss-line::before {
+                font-size: 1.2rem;
+            }
+            
+            .punchline {
+                font-size: 1.1rem;
+            }
+            
+            .final-title {
+                font-size: 2rem;
+            }
+            
+            .final-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Фиксация для телефонов */
+        .mobile-fix {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .mobile-fix:focus {
+            outline: none !important;
+        }
+
+        /* Скроллбар */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="mobile-fix">
+    <!-- Прогресс бар -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Аудио волны -->
+    <div class="audio-wave">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Главный экран -->
+    <section id="main-screen">
+        <div class="container">
+            <h1 class="title">ДИСС НА ПЕРВАКА<br><span>САНЛАО ТПО</span></h1>
+            <p class="subtitle">Приветствие на сайте идет и там спрашивается - ну че сука? вы готовы бля?</p>
+            <button class="button" id="startButton">Ну погнали нахуй!</button>
+        </div>
+    </section>
+
+    <!-- Анимация отсчета -->
+    <div id="countdown">
+        <div class="countdown-number" id="countdownNumber">3</div>
+    </div>
+
+    <!-- Основной дисс (один раунд) -->
+    <section id="diss-section" class="hidden">
+        <div class="container">
+            <div class="round-title">
+                <h2>РАУНД НАХУЙ</h2>
+            </div>
+            
+            <div class="diss-text">
+                <!-- Часть 1 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Мы тут собрались все: <span class="highlight">МС мистер пузо</span>, <span class="highlight">екей два Барбос</span>,</div>
+                    <div class="diss-line hidden">И <span class="highlight">МС Мамин Подсос</span>!</div>
+                    <div class="diss-line hidden">В прошлый раз вынес легко — фристайлом просто играл,</div>
+                    <div class="diss-line hidden">Про маму шутил, признаю, тогда даже не напрягал,</div>
+                    <div class="diss-line hidden">Но сейчас пиши ей похоронные сразу — я режим поменял!</div>
+                </div>
+                
+                <!-- Часть 2 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Так нихуя ты стример — пятьдесят три фолла, это не рост,</div>
+                    <div class="diss-line hidden">Это не канал, это подъезд — весь «фан-клуб» влез в один пост.</div>
+                    <div class="diss-line hidden">Запомнился не контентом, не скиллом, не речью, не словом,</div>
+                    <div class="diss-line hidden">А тем, как по моей указке позорился на зимнем марафоне.</div>
+                </div>
+                
+                <!-- Часть 3 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Шоколадный торт от мамки — в Роппонги выебнулась на показ,</div>
+                    <div class="diss-line hidden">Липкая хуйня внутри, вкус как дешёвый развод, знакомо да?</div>
+                    <div class="diss-line hidden">«На твой ДР мы поедим лучше тортика!» — кричала с пеной у рта,</div>
+                    <div class="diss-line hidden"><span class="punchline">Но у твоей мамы сперма такая сладкая — вот откуда шоколад у торта!</span></div>
+                </div>
+                
+                <!-- Часть 4 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">После нашего первого баттла — я стал разработчиком,</div>
+                    <div class="diss-line hidden">Программистом пиздатыньким, проекты, бабки, всё по-взрослому.</div>
+                    <div class="diss-line hidden">Вьетнам, Дубай, перелёты, азиаток крою — жизнь шире гор,</div>
+                    <div class="diss-line hidden"><span class="punchline">А ты чё? Пошёл в аквапарк — говно тёр тряпкой, помощник уборщика, вот и весь твой путь.</span></div>
+                </div>
+                
+                <!-- Часть 5 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Сто кэсов заработал за три месяца — эт конечно респект, но ни рубля не спустил,</div>
+                    <div class="diss-line hidden">Бабки в гробу лежат, хм, какой-то двойной смысл получается?</div>
+                    <div class="diss-line hidden">Комп за тридцатку мечтал мощный — папин друг бабло спиздил втихаря,</div>
+                    <div class="diss-line hidden">Встроенка слабая за пятнашку — твоя жизнь в точности такая же хуйня!</div>
+                </div>
+                
+                <!-- Часть 6 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Пеленгация — твой спорт ебаный, «Листятники» в лесу с антенной машут,</div>
+                    <div class="diss-line hidden">Пока нормальные пацаны в фортнайт ебашут!</div>
+                    <div class="diss-line hidden">Мы похожи в одиночестве? Да, но я его выбираю сам — когда захочу, уйду в тень,</div>
+                    <div class="diss-line hidden">А ты в нём сгниёшь навсегда — потому что никто к тебе не придёт, даже за деньги.</div>
+                </div>
+                
+                <!-- Часть 7 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Я Соньку трахал жёстко — она стонала, текла и кричала в кровати,</div>
+                    <div class="diss-line hidden">Вся ночь в угаре, кончала раз за разом, в полной страсти.</div>
+                    <div class="diss-line hidden">Ты керамбит показал гордо — она побежала к училке стучать,</div>
+                    <div class="diss-line hidden">Ты заплакал в истерике: «Не рассказывайте маме!»</div>
+                </div>
+                
+                <!-- Часть 8 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Братан, любой твой панч контрится простой идеологией:</div>
+                    <div class="diss-line hidden">Кто с Шевченкой тусил, маски Анонимуса брал — тому не до логики.</div>
+                    <div class="diss-line hidden">Тульсики, пряники — твой максимум, дальше фантазии ноль,</div>
+                    <div class="diss-line hidden">Твой лучший дисс — про манную кашу, о чем речь сынок?</div>
+                </div>
+                
+                <!-- Часть 9 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Чем ты меня баттлить собрался — фотками бати из старого ВК?</div>
+                    <div class="diss-line hidden">Думаешь, это козырь? А если я скажу что: у тебя в свидетельстве о рождении</div>
+                    <div class="diss-line hidden">в графе «отец» не прочерк пустой, а приписка мелкая:</div>
+                    <div class="diss-line hidden"><span class="punchline">променял шалаву из спа — и свалил ебать молоденьких!</span></div>
+                </div>
+                
+                <!-- Часть 10 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Я реально думал в моменте — ты мой самый верный кореш,</div>
+                    <div class="diss-line hidden">Тот, что прилип к банке намертво, не отвалится, если спросишь.</div>
+                    <div class="diss-line hidden">Думал: подойду с вопросом — ответишь чётко и прямо,</div>
+                    <div class="diss-line hidden">Но память вскрыла один эпизод, и вся ваша дружба — обмана.</div>
+                </div>
+                
+                <!-- Часть 11 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Пятый класс, Никита, мохито — да, накосячил, не спорю,</div>
+                    <div class="diss-line hidden">Может, был не прав тогда, но не в этом вся история.</div>
+                    <div class="diss-line hidden">Настоящий кент — это Женя, он вышел ко мне один,</div>
+                    <div class="diss-line hidden">На турники, на площадку — без толпы и без витрин.</div>
+                </div>
+                
+                <!-- Часть 12 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">А ты? Со всеми остальными — плакать в тряпку ушёл,</div>
+                    <div class="diss-line hidden">Даже не подошёл, не сказал ни слова — просто слил и всё.</div>
+                    <div class="diss-line hidden">Я стоял один, и тогда всё встало на места,</div>
+                    <div class="diss-line hidden"><span class="punchline">Вот где разница между кентом и пустым «братаном» навсегда.</span></div>
+                </div>
+                
+                <!-- Часть 13 -->
+                <div class="diss-section">
+                    <div class="diss-line hidden">Так что нахуй тебя и нахуй твою бабку вместе с вашим полудохлым 9-Б,</div>
+                    <div class="diss-line hidden">Лучше захлебнусь ебучим ноунеймом в своём мохито до дна,</div>
+                    <div class="diss-line hidden"><span class="punchline">Чем снова увижу твой зимний марафон — три стрима...</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Конец дисса -->
+    <section id="diss-end" class="hidden">
+        <div class="container">
+            <h2 class="final-title">РАУНД БЛЯ!</h2>
+            <p class="final-subtitle">Дисс окончен. Первак санлао тпо унижен в пух и прах.</p>
+            <button class="restart-button" id="restartButton">Заново нахуй!</button>
+        </div>
+    </section>
+
+    <!-- Звуковой индикатор -->
+    <div class="sound-toggle" id="soundToggle">
+        <i class="fas fa-volume-up"></i>
+    </div>
+
+    <script>
+        // Основные элементы
+        const startButton = document.getElementById('startButton');
+        const countdown = document.getElementById('countdown');
+        const countdownNumber = document.getElementById('countdownNumber');
+        const mainScreen = document.getElementById('main-screen');
+        const dissSection = document.getElementById('diss-section');
+        const dissEnd = document.getElementById('diss-end');
+        const restartButton = document.getElementById('restartButton');
+        const soundToggle = document.getElementById('soundToggle');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Все строки дисса
+        const dissLines = document.querySelectorAll('.diss-line');
+        
+        // Аудио элементы
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = true;
+        
+        // Звуки
+        function playBeep(frequency, duration, type = 'sine') {
+            if (!soundEnabled) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            } catch (e) {
+                console.log("Аудио не поддерживается");
+            }
+        }
+        
+        function playSwoosh() {
+            if (!soundEnabled) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.5);
+                
+                oscillator.type = 'sawtooth';
+                
+                gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                console.log("Аудио не поддерживается");
+            }
+        }
+        
+        // Переключение звука
+        soundToggle.addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            const icon = this.querySelector('i');
+            
+            if (soundEnabled) {
+                icon.className = 'fas fa-volume-up';
+                this.style.backgroundColor = 'var(--primary)';
+                playBeep(523.25, 0.1);
+            } else {
+                icon.className = 'fas fa-volume-mute';
+                this.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            }
+        });
+        
+        // Запуск дисса
+        startButton.addEventListener('click', function() {
+            playBeep(659.25, 0.2, 'square'); // Нота E5
+            startButton.disabled = true;
+            
+            // Анимация отсчета
+            countdown.classList.add('active');
+            
+            let count = 3;
+            countdownNumber.textContent = count;
+            
+            const countdownInterval = setInterval(() => {
+                count--;
+                
+                if (count > 0) {
+                    countdownNumber.textContent = count;
+                    playBeep(523.25 * (4 - count), 0.2, 'square');
+                } else {
+                    countdownNumber.textContent = "НАХУЙ!";
+                    playBeep(987.77, 0.5, 'sawtooth'); // Нота B5
+                    
+                    setTimeout(() => {
+                        clearInterval(countdownInterval);
+                        countdown.classList.remove('active');
+                        
+                        // Показываем дисс
+                        mainScreen.style.display = 'none';
+                        dissSection.classList.remove('hidden');
+                        dissSection.classList.add('visible');
+                        
+                        // Начинаем показ строк дисса
+                        setTimeout(showDissLines, 500);
+                    }, 1000);
+                }
+            }, 1000);
+        });
+        
+        // Показ строк дисса по очереди
+        function showDissLines() {
+            let delay = 0;
+            
+            dissLines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('visible');
+                    playSwoosh();
+                    
+                    // Обновляем прогресс бар
+                    const progress = ((index + 1) / dissLines.length) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    // Если это последняя строка, показываем конец
+                    if (index === dissLines.length - 1) {
+                        setTimeout(() => {
+                            dissEnd.classList.remove('hidden');
+                            dissEnd.classList.add('visible');
+                            
+                            // Прокрутка к концу
+                            dissEnd.scrollIntoView({ behavior: 'smooth' });
+                            
+                            // Финальный звук
+                            if (soundEnabled) {
+                                playBeep(392.00, 0.1, 'sine'); // Нота G4
+                                setTimeout(() => playBeep(493.88, 0.1, 'sine'), 100); // Нота B4
+                                setTimeout(() => playBeep(659.25, 0.5, 'sine'), 200); // Нота E5
+                            }
+                        }, 1000);
+                    }
+                }, delay);
+                
+                // Разная задержка для разных частей
+                const lineText = line.textContent;
+                if (lineText.includes('пунчлайн') || line.classList.contains('punchline')) {
+                    delay += 1500; // Дольше для панчлайнов
+                } else {
+                    delay += 800; // Обычная задержка
+                }
+            });
+        }
+        
+        // Перезапуск
+        restartButton.addEventListener('click', function() {
+            playBeep(659.25, 0.2, 'square');
+            
+            // Скрываем конец
+            dissEnd.classList.remove('visible');
+            dissEnd.classList.add('hidden');
+            
+            // Скрываем дисс
+            dissSection.classList.remove('visible');
+            dissSection.classList.add('hidden');
+            
+            // Сбрасываем строки
+            dissLines.forEach(line => {
+                line.classList.remove('visible');
+            });
+            
+            // Сбрасываем прогресс бар
+            progressBar.style.width = '0%';
+            
+            // Показываем главный экран
+            setTimeout(() => {
+                mainScreen.style.display = 'flex';
+                startButton.disabled = false;
+                
+                // Прокрутка к началу
+                mainScreen.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        });
+        
+        // Прогресс бар при скролле
+        window.addEventListener('scroll', function() {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+        
+        // Параллакс эффект для фона
+        window.addEventListener('mousemove', function(e) {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.body.style.backgroundPosition = `${x * 50}px ${y * 50}px`;
+        });
+        
+        // Анимация при загрузке
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 1s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // Запускаем аудио контекст при первом взаимодействии
+            document.addEventListener('click', function initAudio() {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                document.removeEventListener('click', initAudio);
+            });
+        });
+        
+        // Эффект наведения на строки дисса
+        dissLines.forEach(line => {
+            line.addEventListener('mouseenter', function() {
+                if (soundEnabled) {
+                    playBeep(100 + Math.random() * 100, 0.05, 'sine');
+                }
+            });
+        });
+        
+        // Анимация кнопки старта
+        startButton.addEventListener('mouseenter', function() {
+            playBeep(261.63, 0.1, 'sine'); // Нота C4
+        });
+    </script>
+</body>
+</html>
